@@ -1,20 +1,23 @@
 # Support Engineer Homework
 
 1. Fork this repository.
-2. Use the [test data](https://docs.google.com/spreadsheets/d/1uyDXhb3T3-LVywTvpH1ixWbz6if7vUaUQC6YHcNm-wY/edit?usp=sharing) to answer the questions below. 
-3. Add all SQL and JavaScript files to your fork.
-4. Push up your submission.
+2. Use the [test data](https://docs.google.com/spreadsheets/d/1uyDXhb3T3-LVywTvpH1ixWbz6if7vUaUQC6YHcNm-wY/edit?usp=sharing) to answer the questions below. The test data is in CSV form in two tabs. Each tab represents a table:
+   - organzation
+   - account 
+4. Add all SQL and JavaScript files to your fork.
+5. Write a README explaining how to run your application.
+6. Push up your submission.
 
 ## Questions:
 
 Use JS and SQL to answer the following questions.
 
 **JavaScript**
-- Write a JavaScript application that provides a user with the option to run four reports:
+- Write a JavaScript application. The app can be a CLI or web-based app. It should provide a user with the options to run four reports:
   1. Takes the value of a `myShopifyDomain` field as an input and returns their `optimization` settings.
   2. Loops through all organizations and shows the date they were created (DD/MM/YYYY), their `status`, and `planName` sorted by oldest to newest.
   3. Returns the list of organizations whose status is cancelled.
-  4. Takes the value an `orgName` and returns the organization record in JSON format.
+  4. Takes the value of an `orgName` and returns the organization record in JSON format.
 
 **SQL**
 - Write SQL queries to return:
