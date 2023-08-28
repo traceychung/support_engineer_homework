@@ -9,7 +9,7 @@
 
 **JavaScript**
 - Add an is_canceled method to the account_plan model
-- Write a script that loops through all organizations and prints out their account plan name
+- Write a script that loops through all organizations and prints out their `optimization` settings.
 
 **SQL**
 - How many organizations do not have account plans? 
