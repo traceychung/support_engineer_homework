@@ -8,7 +8,6 @@
 ## Questions:
 
 **JavaScript**
-- Write/generate a TypeScript model for the JSON files
 - Add an is_canceled method to the account_plan model
 - Write a script that loops through all organizations and prints out their account plan name
 
