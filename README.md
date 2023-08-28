@@ -17,7 +17,8 @@ Use JS and SQL to answer the following questions.
   4. Takes the value an `orgName` and returns the organization record in JSON format.
 
 **SQL**
-- How many organizations do not have account plans? 
-- How many organizations have more than one account plan?
-- List all organizations that have only one account plan.
-- List all organizations that have the PASSWORDLESS feature set to true.
+- Write SQL queries to return:
+  - How many organizations do not have account plans? 
+  - How many organizations have more than one account plan?
+  - List all organizations that have only one account plan.
+  - List all organizations that have the PASSWORDLESS feature set to true.
