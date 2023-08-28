@@ -1,7 +1,7 @@
 # Support Engineer Homework
 
 1. Fork this repository.
-2. Use the test data to answer the questions below. 
+2. Use the [test data](https://github.com/smartrr-hello/support_engineer_homework/blob/main/test%20dataset%20-%20organization_orm.csv) to answer the questions below. 
 3. Add all SQL and JavaScript files to your fork.
 4. Push up your submission.
 
