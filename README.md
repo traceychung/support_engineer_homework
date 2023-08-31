@@ -6,7 +6,7 @@
    - account 
 4. Add all SQL and JavaScript files to your fork.
 5. Write a README explaining how to run your application.
-6. Push up your submission.
+6. Push up your submission and let us know where to find it.
 
 ## Questions:
 
