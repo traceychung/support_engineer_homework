@@ -22,7 +22,7 @@ export default function CancelledOrgs() {
   return (
     <div className="mt-5 mb-5">
       <h3 className="block mb-2 text-grape text-xl font-semibold">
-        Cancelled Organizations:
+        Cancelled Organizations
       </h3>
       <ul>
         {cancelled && (

@@ -22,7 +22,7 @@ export default function ListOrgs() {
   return (
     <div className="mt-5 mb-5">
       <h3 className="block mb-2 text-grape text-xl font-semibold">
-        List of Organizations:
+        List of Organizations
       </h3>
       {organizations && (
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border">

@@ -37,21 +37,21 @@ export default function OrgRecord() {
           placeholder="Enter Organization Name e.g. Test Account 1"
         />
         <button
-          className="text-grape bg-lime_green hover:bg-grape hover:text-white font-sm font-bold rounded-lg text-sm text-center ml-2 me-2"
+          className="text-grape bg-lime_green hover:bg-grape hover:text-white font-sm font-semibold rounded-lg text-sm text-center ml-2 me-2"
           onClick={handleFetchOrgRecord}>
           Get Organization Record
         </button>
       </div>
 
       {data && (
-        <div>
+        <div className="mt-2">
           <pre>{JSON.stringify(data, null, 2)}</pre>
         </div>
       )}
 
       {error && (
-        <div>
-          <h3>{error}</h3>
+        <div className="mt-2 bg-red-100 border border-red text-red px-4 py-3 rounded relative">
+          {error}
         </div>
       )}
     </div>

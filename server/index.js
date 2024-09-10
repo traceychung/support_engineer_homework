@@ -6,6 +6,7 @@ const csv = require("csv-parser");
 
 const app = express();
 app.use(cors());
+app.use(express.json())
 app.use(bodyParser.json());
 
 let organizations = [];
@@ -23,7 +24,31 @@ fs.createReadStream("./data/organizations.csv")
       orgName: row.orgName,
       shopifyStoreId: row.__shopifyStoreId__,
       myShopifyDomain: row.myShopifyDomain,
-      optimization: JSON.parse(row.setup).optimization, // Parse optimization settings from the "setup" field
+      numBillingRetries: row.numBillingRetries,
+      numFailedCyclesBeforeCancel: row.numFailedCyclesBeforeCancel,
+      delayBetweenRetries: row.delayBetweenRetries,
+      logo: row.logo,
+      billingTime: row.billingTime,
+      billingTimezone: row.billingTimezone,
+      initialSubscriptionImportComplete:
+        row.initialSubscriptionImportComplete === "TRUE", // Convert to boolean
+      monthlyFee: parseFloat(row.monthly_fee),
+      perTransactionFee: parseFloat(row.per_transaction_fee),
+      perTransactionPercentageFee: parseFloat(
+        row.per_transaction_percentage_fee
+      ),
+      billingStartDate: row.billing_start_date,
+      account: JSON.parse(row.account), // Parse JSON
+      alloyUserId: row.alloyUserId,
+      activeWorkflows: JSON.parse(row.activeWorkflows), // Parse JSON
+      setup: JSON.parse(row.setup), // Parse JSON,
+      outOfStockBehavior: row.outOfStockBehavior,
+      cancellationMessage: row.cancellationMessage,
+      hasVisitedRetention: row.hasVisitedRetention === "TRUE", // Convert to boolean
+      rewardsPointMeaningId: parseInt(row.rewardsPointMeaningId, 10),
+      hasOtpEnabled: row.hasOtpEnabled === "TRUE", // Convert to boolean
+      instagramUserData: JSON.parse(row.instagramUserData), // Parse JSON
+      lookerDashboardPrefix: row.lookerDashboardPrefix,
     });
   })
   .on("end", () => {
@@ -53,7 +78,7 @@ app.get("/optimization/:domain", (req, res) => {
 
   if (organization) {
     res.json({
-      optimization: organization.optimization,
+      optimization: organization.setup.optimization,
     });
   } else {
     res.status(404).json({ error: "Organization not found" });
