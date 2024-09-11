@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 export default function CancelledOrgs() {
   const [cancelled, setCancelled] = useState([]);
-  const backendUrl = "http://localhost:3001";
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
   useEffect(() => {
     const fetchCancelled = async () => {

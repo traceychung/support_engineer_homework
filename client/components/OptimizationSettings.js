@@ -6,7 +6,7 @@ export default function OptimizationSettings() {
   const [myShopifyDomain, setMyShopifyDomain] = useState("");
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
-  const backendUrl = "http://localhost:3001";
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
   const handleFetchOptimizationSettings = async () => {
     try {

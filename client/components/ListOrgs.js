@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 export default function ListOrgs() {
   const [organizations, setOrganizations] = useState([]);
-  const backendUrl = "http://localhost:3001";
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
   useEffect(() => {
     const fetchOrganizations = async () => {
