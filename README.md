@@ -1,3 +1,19 @@
+# How to Install and Run the Project
+This project assumes Node.js and npm are installed on your machine.
+
+1. Clone the repository with `git clone https://github.com/traceychung/support_engineer_homework.git`
+2. Navigate to the project folder `cd support_engineer_homework`
+
+To start the server:
+1. Navigate to server `cd server`
+2. Install dependencies with `npm install`
+3. Enter `node index.js`
+
+To start the client:
+1. Navigate to client `cd client`
+2. Install dependencies with `npm install`
+3. Enter `npm run dev`
+
 # Support Engineer Homework
 
 1. Fork this repository.
