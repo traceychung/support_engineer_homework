@@ -3,6 +3,8 @@ This project assumes Node.js and npm are installed on your machine.
 
 1. Clone the repository with `git clone https://github.com/traceychung/support_engineer_homework.git`
 2. Navigate to the project folder `cd support_engineer_homework`
+3. Create a `.env` file in the root folder with the variable "BACKEND_PORT" and set it to any port number
+4. Create a `.env.local` file in the `client` folder with the variable "BACKEND_URL" and set it to `https://localhost:{the value you set for BACKEND_PORT}`
 
 To start the server:
 1. Navigate to server `cd server`
