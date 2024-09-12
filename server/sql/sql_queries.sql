@@ -5,7 +5,7 @@ FROM
     organizations o
 LEFT JOIN
     account_plans a
-    ON o.id = a.organizationId
+    ON o.id = a.organization_id
 WHERE
     a.id IS NULL;
 
@@ -20,7 +20,7 @@ FROM
     FROM
         organizations o
         LEFT JOIN account_plans a
-        on o.id = a.organizationId
+        on o.id = a.organization_id
     GROUP BY 1
     ) as ac
 WHERE
@@ -37,7 +37,7 @@ FROM
     FROM
         organizations o
         LEFT JOIN account_plans a
-        on o.id = a.organizationId
+        on o.id = a.organization_id
     GROUP BY 1
     ) as ac
 WHERE
@@ -45,7 +45,7 @@ WHERE
 
 -- List all organizations that have the PASSWORDLESS feature set to true.
 SELECT
-    DISTINCT a.organizationId
+    DISTINCT a.organization_id
 FROM
     account_plans a
 WHERE

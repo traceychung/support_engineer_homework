@@ -95,7 +95,7 @@ To run this project, ensure you have the following installed on your machine:
 `http://localhost:3001`
 
 ## Endpoints
-1. Get Optimization Settings
+1. *Get Optimization Settings*
 - Endpoint: `/optimization/:domain`
 - Method: `GET`
 - Description: Retrieve optimization settings for a specific organization by its myShopifyDomain
@@ -119,7 +119,7 @@ To run this project, ensure you have the following installed on your machine:
     }
     ```
 
-2. Get All Organizations
+2. *Get All Organizations*
 - Endpoint: `/organizations`
 - Method: `GET`
 - Description: Retrieve a list of all organizations sorted by creation date
@@ -142,7 +142,7 @@ To run this project, ensure you have the following installed on your machine:
     ]
     ```
 
-3. Get Cancelled Organizations
+3. *Get Cancelled Organizations*
 - Endpoint: `/organizations/cancelled`
 - Method: `GET`
 - Description: Retrieve a list of organizations that have been cancelled
@@ -165,7 +165,7 @@ To run this project, ensure you have the following installed on your machine:
     ]
     ```
 
-4. Get Organization by Name
+4. *Get Organization by Name*
 - Endpoint: `/organization/:name`
 - Method: `GET`
 - Description: Retrieve detailed information for a specific organization by its name
@@ -188,8 +188,17 @@ To run this project, ensure you have the following installed on your machine:
     ```
 
 # SQL Queries
-The following SQL queries can be found at `./server/sql/sql_queries.sql`.
+The SQL queries for the following tasks can be found at `./server/sql/sql_queries.sql`.
+
+## Queries Provided
 - How many organizations do not have account plans?
 - How many organizations have more than one account plan?
 - List all organizations that have only one account plan.
 - List all organizations that have the PASSWORDLESS feature set to true.
+
+## How to Execute the SQL Queries
+1. *Set Up the Database*:
+  - Use an online SQL Editor like [NextLeap](https://nextleap.app/online-compiler/sql-programming) or any SQL client of your choice
+  - Copy and paste the `init-db.sql` file into your SQL Editor to create the necessary tables and insert the corresponding data
+2. *Run the Queries*:
+  -  Copy and paste each query from `./server/sql/sql_queries.sql` into the SQL Editor to execute them
