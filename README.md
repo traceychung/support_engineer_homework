@@ -27,8 +27,8 @@ To run this project, ensure you have the following installed on your machine:
   cd support_engineer_homework
   ```
 3. Set up environment variables
-  1. Create a `.env` file in the `server` folder with the variable `BACKEND_PORT` (e.g., `BACKEND_PORT=3001`).
-  2. Create a `.env.local` file in the `client` folder with the variable `BACKEND_URL` (e.g., `BACKEND_URL=http://localhost:3001`).
+    - Create a `.env` file in the `server` folder with the variable `BACKEND_PORT` (e.g., `BACKEND_PORT=3001`).
+    - Create a `.env.local` file in the `client` folder with the variable `NEXT_PUBLIC_BACKEND_URL` (e.g., `BACKEND_URL=http://localhost:3001`).
 
 ## Running the Server
 1. Open a new terminal window
@@ -59,6 +59,36 @@ To run this project, ensure you have the following installed on your machine:
   ```
   npm run dev
   ```
+5. Launch the web app by navigating to `http://localhost:3000`
+
+# Directory Structure
+```bash
+.
+├── README.md
+├── client
+│   ├── app
+│   │   ├── globals.css
+│   │   ├── layout.js
+│   │   └── page.js
+│   ├── components
+│   │   ├── CancelledOrgs.js
+│   │   ├── ListOrgs.js
+│   │   ├── OptimizationSettings.js
+│   │   └── OrgRecord.js
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── postcss.config.js
+│   └── tailwind.config.js
+└── server
+    ├── data
+    │   ├── account_plans.csv
+    │   └── organizations.csv
+    ├── index.js
+    ├── package-lock.json
+    ├── package.json
+    └── sql
+        └── sql_queries.sql
+```
 
 # API Endpoints
 ## Base URL
@@ -156,3 +186,6 @@ To run this project, ensure you have the following installed on your machine:
       ...
     }
     ```
+
+# SQL Queries
+The following SQL queries are located can be found at `./server/sql/sql_queries.sql`.
