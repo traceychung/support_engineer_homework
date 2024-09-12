@@ -19,30 +19,46 @@ To run this project, ensure you have the following installed on your machine:
 
 ## Installation
 1. Clone the repository
-  ```git clone https://github.com/traceychung/support_engineer_homework.git```
+  ```
+  git clone https://github.com/traceychung/support_engineer_homework.git
+  ```
 2. Navigate to the project folder
-  ```cd support_engineer_homework```
+  ```
+  cd support_engineer_homework
+  ```
 3. Set up environment variables
-  - Create a `.env` file in the `server` folder with the variable `BACKEND_PORT` (e.g., `BACKEND_PORT=3001`).
-  - Create a `.env.local` file in the `client` folder with the variable `BACKEND_URL` (e.g., `BACKEND_URL=http://localhost:3001`).
+  1. Create a `.env` file in the `server` folder with the variable `BACKEND_PORT` (e.g., `BACKEND_PORT=3001`).
+  2. Create a `.env.local` file in the `client` folder with the variable `BACKEND_URL` (e.g., `BACKEND_URL=http://localhost:3001`).
 
 ## Running the Server
 1. Open a new terminal window
 2. Navigate to the `server` folder
-  ```cd server```
+  ```
+  cd server
+  ```
 3. Install dependencies
-  ```npm install```
+  ```
+  npm install
+  ```
 4. Start the server
-  ```node index.js```
+  ```
+  node index.js
+  ```
 
 ## Running the Client
 1. Open a new terminal window
 2. Navigate to the `client` folder
-  ```cd client```
+  ```
+  cd client
+  ```
 3. Install dependencies
-  ```npm install```
+  ```
+  npm install
+  ```
 4. Start the client
-  ```npm run dev```
+  ```
+  npm run dev
+  ```
 
 # API Endpoints
 ## Base URL
@@ -56,7 +72,9 @@ To run this project, ensure you have the following installed on your machine:
 - URL Parameters:
   - `domain` (string): The Shopify domain of the organization
 - Request Example:
-  ```GET /optimization/test-account-1.myshopify.com```
+  ```
+  GET /optimization/test-account-1.myshopify.com
+  ```
 - Response:
   - Status Code: `200 OK`
   - Body:
@@ -76,7 +94,9 @@ To run this project, ensure you have the following installed on your machine:
 - Method: `GET`
 - Description: Retrieve a list of all organizations sorted by creation date
 - Request Example:
-  ```GET /organizations```
+  ```
+  GET /organizations
+  ```
 - Response:
   - Status Code: `200 OK`
   - Body:
@@ -97,7 +117,9 @@ To run this project, ensure you have the following installed on your machine:
 - Method: `GET`
 - Description: Retrieve a list of organizations that have been cancelled
 - Request Example:
-  ```GET /organizations/cancelled```
+  ```
+  GET /organizations/cancelled
+  ```
 - Response:
   - Status Code: `200 OK`
   - Body:
@@ -120,7 +142,9 @@ To run this project, ensure you have the following installed on your machine:
 - URL Parameters:
   - `name` (string): The name of the organization
 - Request Example:
-  - `GET /organizations/Test%20Account%201`
+  ```
+  GET /organizations/Test%20Account%201
+  ```
 - Response:
   - Status Code: `200 OK`
   - Body:
