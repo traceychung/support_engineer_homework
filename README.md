@@ -1,46 +1,134 @@
-# How to Install and Run the Project
-This project assumes Node.js and npm are installed on your machine.
+# Organization Reports Application
+This project is a web-based application that provides insights into organizational data. It uses Express for the backend, Next.js for the frontend, and TailwindCSS for styling. Users can view various reports related to organizations, including their optimization settings, a list of organizations, cancelled organizations, and detailed information by organization name.
 
-1. Clone the repository with `git clone https://github.com/traceychung/support_engineer_homework.git`
-2. Navigate to the project folder `cd support_engineer_homework`
-3. Create a `.env` file in the root folder with the variable "BACKEND_PORT" and set it to any port number
-4. Create a `.env.local` file in the `client` folder with the variable "BACKEND_URL" and set it to `https://localhost:{the value you set for BACKEND_PORT}`
+# Features
+- Optimizations Settings
+    - Takes the value of a `myShopifyDomain` field as an input and returns their `optimization` settings
+- List of Organizations
+   -  Loops through all organizations and shows the date they were created (DD/MM/YYYY), their `status`, and `planName` sorted by oldest to newest
+- List of Cancelled Organizations
+  - Returns the list of organizations whose status is cancelled
+- Organization Record by Organization Name
+  - Takes the value of an `orgName` and returns the organization record in JSON format
 
-To start the server:
-1. Navigate to server `cd server`
-2. Install dependencies with `npm install`
-3. Enter `node index.js`
+# Getting Started
+## Prerequisites
+To run this project, ensure you have the following installed on your machine:
+- Node.js
+- npm
 
-To start the client:
-1. Navigate to client `cd client`
-2. Install dependencies with `npm install`
-3. Enter `npm run dev`
+## Installation
+1. Clone the repository
+  ```git clone https://github.com/traceychung/support_engineer_homework.git```
+2. Navigate to the project folder
+  ```cd support_engineer_homework```
+3. Set up environment variables
+  - Create a `.env` file in the `server` folder with the variable `BACKEND_PORT` (e.g., `BACKEND_PORT=3001`).
+  - Create a `.env.local` file in the `client` folder with the variable `BACKEND_URL` (e.g., `BACKEND_URL=http://localhost:3001`).
 
-# Support Engineer Homework
+## Running the Server
+1. Open a new terminal window
+2. Navigate to the `server` folder
+  ```cd server```
+3. Install dependencies
+  ```npm install```
+4. Start the server
+  ```node index.js```
 
-1. Fork this repository.
-2. Add `jamtur01` as a collaborator to your repository.
-3. Use the [test data](https://docs.google.com/spreadsheets/d/1uyDXhb3T3-LVywTvpH1ixWbz6if7vUaUQC6YHcNm-wY/edit?usp=sharing) to answer the questions below. The test data is in CSV form in two tabs. Each tab represents a table:
-   - organization
-   - account 
-4. Add all SQL and JavaScript files to your fork.
-5. Write a README explaining how to run your application.
-6. Push up your submission and let us know where to find it.
+## Running the Client
+1. Open a new terminal window
+2. Navigate to the `client` folder
+  ```cd client```
+3. Install dependencies
+  ```npm install```
+4. Start the client
+  ```npm run dev```
 
-## Questions:
+# API Endpoints
+## Base URL
+`http://localhost:3001`
 
-Use JS and SQL to answer the following questions.
+## Endpoints
+1. Get Optimization Settings
+- Endpoint: `/optimization/:domain`
+- Method: `GET`
+- Description: Retrieve optimization settings for a specific organization by its myShopifyDomain
+- URL Parameters:
+  - `domain` (string): The Shopify domain of the organization
+- Request Example:
+  ```GET /optimization/test-account-1.myshopify.com```
+- Response:
+  - Status Code: `200 OK`
+  - Body:
+    ```
+    {
+      "optimization": {
+        "shipping": true,
+        "theming": false,
+        "transaction": true,
+        "integrations": true
+      }
+    }
+    ```
 
-**JavaScript**
-- Write a JavaScript application. The app can be a CLI or web-based app. It should provide a user with the options to run four reports:
-  1. Takes the value of a `myShopifyDomain` field as an input and returns their `optimization` settings.
-  2. Loops through all organizations and shows the date they were created (DD/MM/YYYY), their `status`, and `planName` sorted by oldest to newest.
-  3. Returns the list of organizations whose status is cancelled.
-  4. Takes the value of an `orgName` and returns the organization record in JSON format.
+2. Get All Organizations
+- Endpoint: `/organizations`
+- Method: `GET`
+- Description: Retrieve a list of all organizations sorted by creation date
+- Request Example:
+  ```GET /organizations```
+- Response:
+  - Status Code: `200 OK`
+  - Body:
+    ```
+    [
+      {
+        "orgName": "Test Account 1",
+        "createdDate": "2023-01-20T04:07:20Z",
+        "status": "ACTIVE",
+        "planName": "Basic Plan"
+      },
+      ...
+    ]
+    ```
 
-**SQL**
-- Write SQL queries to return:
-  - How many organizations do not have account plans? 
-  - How many organizations have more than one account plan?
-  - List all organizations that have only one account plan.
-  - List all organizations that have the PASSWORDLESS feature set to true.
+3. Get Cancelled Organizations
+- Endpoint: `/organizations/cancelled`
+- Method: `GET`
+- Description: Retrieve a list of organizations that have been cancelled
+- Request Example:
+  ```GET /organizations/cancelled```
+- Response:
+  - Status Code: `200 OK`
+  - Body:
+    ```
+    [
+      {
+        "createdDate": "2023-01-20T00:44:55Z",
+        "planName": "Premium Plan",
+        "organizationId": "75f223ec-2ede-4b38-9096-f9333d4141c7",
+        "status": "CANCELLED"
+      },
+      ...
+    ]
+    ```
+
+4. Get Organization by Name
+- Endpoint: `/organization/:name`
+- Method: `GET`
+- Description: Retrieve detailed information for a specific organization by its name
+- URL Parameters:
+  - `name` (string): The name of the organization
+- Request Example:
+  - `GET /organizations/Test%20Account%201`
+- Response:
+  - Status Code: `200 OK`
+  - Body:
+    ```
+    {
+      "id": "cce0223a-fcac-4953-9137-3c5c10c158c3",
+      "orgName": "Test Account 1",
+      "myShopifyDomain": "test-account-1.myshopify.com",
+      ...
+    }
+    ```
