@@ -40,7 +40,7 @@ export default function CancelledOrgs() {
             <tbody>
               {cancelled.map((org, index) => (
                 <tr key={index} className="odd:bg-white even:bg-gray-50">
-                  <td className="px-6 py-4">{org.organizationId}</td>
+                  <td className="px-6 py-4">{org.orgName}</td>
                   <td className="px-6 py-4">{org.status}</td>
                 </tr>
               ))}

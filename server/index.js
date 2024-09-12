@@ -4,6 +4,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const fs = require("fs");
 const csv = require("csv-parser");
+const moment = require("moment");
 
 const app = express();
 app.use(cors());
@@ -12,45 +13,58 @@ app.use(bodyParser.json());
 
 let organizations = [];
 let accountPlans = [];
+let organizationsMap = {};
+
+// Function to determine and convert the data type of a value
+function parseValue(value) {
+  // Check if the value is a nested object (e.g., JSON string)
+  try {
+    // Try to parse the value as JSON if it looks like a JSON object
+    if (value.startsWith("{") || value.startsWith("[")) {
+      const parsed = JSON.parse(value);
+      if (typeof parsed === "object") {
+        return parsed;
+      }
+    }
+  } catch (e) {
+    // If JSON parsing fails, continue with other types
+    console.error("Error parsing JSON: ", e);
+  }
+  // Convert to number if possible
+  if (!isNaN(value) && value !== "") {
+    return parseFloat(value);
+  }
+  // Convert to boolean if it matches true/false
+  if (value.toLowerCase() === "true") {
+    return true;
+  }
+  if (value.toLowerCase() === "false") {
+    return false;
+  }
+  if (value === "NULL") {
+    return null;
+  }
+  // Attempt to parse date (ISO format or other recognizable formats)
+  if (moment(value, "YYYY-MM-DD H:mm:ss", true).isValid()) {
+      const date = new Date(value);
+      return date;
+  }
+  // Default case: return the value as a string
+  return value;
+}
 
 // Read data from the CSV when the server starts
+let orgIndex = 0
 fs.createReadStream("./data/organizations.csv")
   .pipe(csv())
   .on("data", (row) => {
-    organizations.push({
-      createdDate: row.createdDate,
-      updatedDate: row.updatedDate,
-      deletedAt: row.deletedAt,
-      id: row.id,
-      orgName: row.orgName,
-      shopifyStoreId: row.__shopifyStoreId__,
-      myShopifyDomain: row.myShopifyDomain,
-      numBillingRetries: row.numBillingRetries,
-      numFailedCyclesBeforeCancel: row.numFailedCyclesBeforeCancel,
-      delayBetweenRetries: row.delayBetweenRetries,
-      logo: row.logo,
-      billingTime: row.billingTime,
-      billingTimezone: row.billingTimezone,
-      initialSubscriptionImportComplete:
-        row.initialSubscriptionImportComplete === "TRUE", // Convert to boolean
-      monthlyFee: parseFloat(row.monthly_fee),
-      perTransactionFee: parseFloat(row.per_transaction_fee),
-      perTransactionPercentageFee: parseFloat(
-        row.per_transaction_percentage_fee
-      ),
-      billingStartDate: row.billing_start_date,
-      account: JSON.parse(row.account), // Parse JSON
-      alloyUserId: row.alloyUserId,
-      activeWorkflows: JSON.parse(row.activeWorkflows), // Parse JSON
-      setup: JSON.parse(row.setup), // Parse JSON,
-      outOfStockBehavior: row.outOfStockBehavior,
-      cancellationMessage: row.cancellationMessage,
-      hasVisitedRetention: row.hasVisitedRetention === "TRUE", // Convert to boolean
-      rewardsPointMeaningId: parseInt(row.rewardsPointMeaningId, 10),
-      hasOtpEnabled: row.hasOtpEnabled === "TRUE", // Convert to boolean
-      instagramUserData: JSON.parse(row.instagramUserData), // Parse JSON
-      lookerDashboardPrefix: row.lookerDashboardPrefix,
-    });
+    let obj = {};
+    for (const key in row) {
+      obj[key] = parseValue(row[key]);
+    }
+    organizationsMap[row.id] = orgIndex;
+    orgIndex++;
+    organizations.push(obj);
   })
   .on("end", () => {
     console.log("Organizations CSV file successfully processed");
@@ -59,16 +73,16 @@ fs.createReadStream("./data/organizations.csv")
 fs.createReadStream("./data/account_plans.csv")
   .pipe(csv())
   .on("data", (row) => {
-    accountPlans.push({
-      createdDate: row.createdDate,
-      planName: row.planName,
-      organizationId: row.organizationId,
-      status: row.status,
-    });
+    let obj = {};
+    for (const key in row) {
+      obj[key] = parseValue(row[key]);
+    }
+    accountPlans.push(obj);
   })
   .on("end", () => {
-    console.log("Account Plan CSV file successfully processed");
+    console.log("Account Plans CSV file successfully processed");
   });
+
 
 // Endpoint to get optimization settings by myShopifyDomain
 app.get("/optimization/:domain", (req, res) => {
@@ -82,7 +96,7 @@ app.get("/optimization/:domain", (req, res) => {
       optimization: organization.setup.optimization,
     });
   } else {
-    res.status(404).json({ error: "Organization not found" });
+    res.status(404).json({ error: "Organization not found"});
   }
 });
 
@@ -92,7 +106,7 @@ app.get("/organizations", (req, res) => {
     .slice()
     .sort((a, b) => new Date(a.createdDate) - new Date(b.createdDate))
     .map((org) => ({
-      orgName: org.organizationId,
+      orgName: organizations[organizationsMap[org.organizationId]].orgName,
       createdDate: org.createdDate,
       status: org.status,
       planName: org.planName,
@@ -102,9 +116,12 @@ app.get("/organizations", (req, res) => {
 
 // Endpoint to get cancelled organizations
 app.get("/organizations/cancelled", (req, res) => {
-  const cancelledOrgs = accountPlans.filter(
-    (org) => org.status === "CANCELLED"
-  );
+  const cancelledOrgs = accountPlans
+    .filter((org) => org.status === "CANCELLED")
+    .map((org) => ({
+      orgName: organizations[organizationsMap[org.organizationId]].orgName,
+      status: org.status,
+    }));
   res.json(cancelledOrgs);
 });
 
