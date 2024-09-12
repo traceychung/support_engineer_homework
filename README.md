@@ -158,7 +158,7 @@ To run this project, ensure you have the following installed on your machine:
       {
         "createdDate": "2023-01-20T00:44:55Z",
         "planName": "Premium Plan",
-        "organizationId": "75f223ec-2ede-4b38-9096-f9333d4141c7",
+        "orgName": "Test Account 5",
         "status": "CANCELLED"
       },
       ...
@@ -188,4 +188,8 @@ To run this project, ensure you have the following installed on your machine:
     ```
 
 # SQL Queries
-The following SQL queries are located can be found at `./server/sql/sql_queries.sql`.
+The following SQL queries can be found at `./server/sql/sql_queries.sql`.
+- How many organizations do not have account plans?
+- How many organizations have more than one account plan?
+- List all organizations that have only one account plan.
+- List all organizations that have the PASSWORDLESS feature set to true.
