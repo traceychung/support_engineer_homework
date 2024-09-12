@@ -28,7 +28,7 @@ To run this project, ensure you have the following installed on your machine:
   ```
 3. Set up environment variables
     - Create a `.env` file in the `server` folder with the variable `BACKEND_PORT` (e.g., `BACKEND_PORT=3001`).
-    - Create a `.env.local` file in the `client` folder with the variable `NEXT_PUBLIC_BACKEND_URL` (e.g., `BACKEND_URL=http://localhost:3001`).
+    - Create a `.env.local` file in the `client` folder with the variable `NEXT_PUBLIC_BACKEND_URL` (e.g., `NEXT_PUBLIC_BACKEND_URL=http://localhost:3001`).
 
 ## Running the Server
 1. Open a new terminal window
